@@ -1,14 +1,14 @@
 version: "3"
 services:
   react-app:
-    image: nareshduduka/EasyFarming-Client:latest
+    image: nareshduduka/easyfarming-client:latest
     stdin_open: true
     ports:
       - "3000:3000"
     networks:
       - mern-app
   api-server:
-    image: nareshduduka/EasyFarming-Server:latest
+    image: nareshduduka/easyfarming-server:latest
     ports:
       - "8000:8000"
     networks:
