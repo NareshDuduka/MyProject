@@ -3,24 +3,24 @@ import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 
-const Dashboard = () => {
+const FarmerDashboard = () => {
     const {
         user: { _id, name, email, role }
     } = isAuthenticated();
 
-	const userLinks = () => {
+	const FarmerLinks = () => {
         return (
             <div className="card">
-                <h4 className="card-header">User Links</h4>
+                <h4 className="card-header">Farmer Links</h4>
                 <ul className="list-group">
                     <li className="list-group-item">
-                        <Link className="nav-link" to="/cart">
-                            My Cart
+                        <Link className="nav-link" to="/add/vegetables">
+                            Add Vegetables
                         </Link>
                     </li>
                     <li className="list-group-item">
-                        <Link className="nav-link" to="/profile/update">
-                            Update Profile
+                        <Link className="nav-link" to="/remove/vegetables">
+                            Remove Vegetables
                         </Link>
                     </li>
                 </ul>
@@ -28,7 +28,7 @@ const Dashboard = () => {
         );
     };
 
-	const userInfo = () => {
+	const farmerInfo = () => {
         return (
             <div className="card mb-5">
 				<h3 className="card-header">User Information</h3>
@@ -41,17 +41,6 @@ const Dashboard = () => {
         );
     };
 
-	const purchaseHistory = () => {
-        return (
-            <div className="card mb-5">
-                <h3 className="card-header">Purchase history</h3>
-                <ul className="list-group">
-                    <li className="list-group-item">history</li>
-                </ul>
-            </div>
-        );
-	};
-
 	return (
         <Layout
             title={`Welcome ${name} !`} description="easy Farming" 
@@ -59,10 +48,9 @@ const Dashboard = () => {
         >
 			
 			<div className="row">
-                <div className="col-md-2 offset-md-0">{userLinks()}</div>
+                <div className="col-md-2 offset-md-0">{FarmerLinks()}</div>
                 <div className="col-md-6 offset-md-1">
-                    {userInfo()}
-                    {purchaseHistory()}
+                    {farmerInfo()}
                 </div>
             </div>
 
@@ -71,4 +59,4 @@ const Dashboard = () => {
 };
 
 
-export default Dashboard;
+export default FarmerDashboard;
