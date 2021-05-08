@@ -161,3 +161,19 @@ exports.update = (req, res) => {
             res.json(vegetables);
         });
 };
+//farmers vegetables based on one vegetable
+exports.listRelated = (req, res) => {
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+    Vegetables.find({ _id: { $ne: req.vegetable }, user: req.vegetable.farmer_id })
+        .limit(limit)
+        .populate("farmer_id", "_id name")
+        .exec((err, vegetables) => {
+            if (err) {
+                return res.status(400).json({
+                    error: "vegetables not found"
+                });
+            }
+            res.json(vegetables);
+        });
+};

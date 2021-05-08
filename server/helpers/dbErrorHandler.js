@@ -6,10 +6,12 @@
 const uniqueMessage = error => {
     let output;
     try {
+        
         let fieldName = error.message.substring(
             error.message.lastIndexOf(".$") + 2,
             error.message.lastIndexOf("_1")
         );
+        console.log(fieldName);
         output =
             fieldName.charAt(0).toUpperCase() +
             fieldName.slice(1) +
