@@ -4,14 +4,12 @@ import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import { createVegetable } from "./apiFarmer";
 
-const AddVegetable = () =>{
-    const { user, token } = isAuthenticated();
-    
+const AddVegetable = () => {
     const [values, setValues] = useState({
-        name: "",
+        item_name: "",
         price: "",
         quantity: "",
-        farmer_id: '',
+        farmer_id:" ",
         photo: "",
         loading: false,
         error: "",
@@ -20,14 +18,16 @@ const AddVegetable = () =>{
         formData: ""
     });
 
+    const { user, token } = isAuthenticated();
+
     const {
-        name,
+        item_name,
         price,
         quantity,
         farmer_id,
         loading,
         error,
-        createdVegetable,
+        createdProduct,
         redirectToProfile,
         formData
     } = values;
@@ -46,21 +46,20 @@ const AddVegetable = () =>{
     const clickSubmit = event => {
         event.preventDefault();
         setValues({ ...values, error: "", loading: true });
-        console.log(values);
-       // console.log(JSON.stringify(formData));
+
         createVegetable(user._id, token, formData)
         .then(data => {
             if (data.error) {
                 setValues({ ...values, error: data.error });
-                
             } else {
                 setValues({
                     ...values,
-                    name: "",
+                    item_name: "",
+                    photo: "",
                     price: "",
                     quantity: "",
                     loading: false,
-                    createdVegetable: data.name
+                    createdProduct: data.name
                 });
             }
         });
@@ -73,11 +72,11 @@ const AddVegetable = () =>{
             <div className="form-group">
                 <label>Item name</label>
                 <input
-                    onChange={handleChange("name")}
+                    onChange={handleChange("item_name")}
                     type="text"
                     className="form-control"
                     placeholder="Item name"
-                    value={name}
+                    value={item_name}
                 />
             </div>
 
